@@ -143,19 +143,14 @@ export function renderAbout() {
     <div class="stay"><h3>CONTACT US</h3><div class="dots"><a class="dot" href="#">✉</a><a class="dot" href="#">fb</a><a class="dot" href="#">📍</a></div>
       <p class="hint" style="color:var(--gold)">Email · Facebook · Student-SSC Office</p></div>
     <h3 class="center">Meet the Student-SSC</h3><div id="memCar" class="carousel"></div>`;
-  renderCarousel(
-  $("memCar"),
-  "members",
-  MEMBERS,
-  3,
-  (member) => `
+  renderCarousel($("memCar"), "members", MEMBERS, 3, (member) => `
     <div class="mem">
-      <div class="circ">
-        <img src="./${member.image}" alt="${member.name}">
+      <div class="member-photo">
+        <img src="./${member.image}" alt="${esc(member.name)}">
       </div>
-      <b>${member.name}</b>
-      <p>${member.position}</p>
-      <p>${member.email}</p>
+      <b>${esc(member.name)}</b>
+      <p class="member-position">${esc(member.position)}</p>
+      <a class="member-email" href="mailto:${esc(member.email)}">${esc(member.email)}</a>
     </div>`);
 }
 
