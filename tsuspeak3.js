@@ -146,12 +146,12 @@ export function renderAbout() {
   renderCarousel($("memCar"), "members", MEMBERS, 3, (member) =>
     `<div class="mem">
   <div class="circ">
-    <img src="./${esc(member.image)}" alt="${esc(member.name)}">
-  </div>
-  <b>${esc(member.name)}</b>
-  ${esc(member.position)}
-  <br>${esc(member.email)}
-</div>`);}
+    <img src="./images/${esc(member.image)}"
+     alt="${esc(member.name)}">
+
+<b>${esc(member.name)}</b>
+${esc(member.position)}
+<br>${esc(member.email)}
 
 export function renderSubmit() {
   $("category").innerHTML = appData.categories.map((category) => `<option value="${esc(category)}">${esc(category)}</option>`).join("");
