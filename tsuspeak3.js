@@ -152,9 +152,11 @@ export function renderAbout() {
       <p class="member-position">${esc(member.position)}</p>
       <a class="member-email" href="mailto:${esc(member.email)}" style="display:block;font-size:11px;color:#800000">${esc(member.email)}</a>
     </div>`);
+}
 export function renderSubmit() {
   $("category").innerHTML = appData.categories.map((category) => `<option value="${esc(category)}">${esc(category)}</option>`).join("");
 }
+
 
 export function renderTracker() {
   const tableBody = $("trackBody");
