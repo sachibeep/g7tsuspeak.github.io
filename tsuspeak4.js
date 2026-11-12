@@ -8,14 +8,19 @@ import { renderCurrentPage, renderSuggestionDetail } from "./tsuspeak3.js";
 const pages = document.querySelectorAll(".page");
 
 export function ensureSession() {
-  if (state.currentUser && state.sessionExpiresAt <= Date.now()) {
+  if (!state.currentUser) {
+    return false;
+  }
+
+  if (!state.sessionExpiresAt || state.sessionExpiresAt <= Date.now()) {
     state.currentUser = null;
     state.sessionExpiresAt = 0;
     clearSavedSession();
     updateAuthUI();
     return false;
   }
-  return Boolean(state.currentUser);
+
+  return true;
 }
 
 export function updateAuthUI() {
@@ -324,18 +329,22 @@ function handleExpiredSession() {
 }
 
 export function initTSUSpeak() {
-
   if (document.documentElement.dataset.tsuSpeakInitialized === "true") return;
+
   document.documentElement.dataset.tsuSpeakInitialized = "true";
 
   setSessionExpiredHandler(handleExpiredSession);
   registerEventListeners();
+
   updateAuthUI();
 
-  if (state.currentUser) {
+  if (state.currentUser && state.sessionExpiresAt > Date.now()) {
     scheduleSessionExpiry(state.sessionExpiresAt);
     showPage(isAdmin() ? "admin" : "home");
   } else {
+    state.currentUser = null;
+    state.sessionExpiresAt = 0;
+    clearSavedSession();
     showPage("login");
   }
 }
