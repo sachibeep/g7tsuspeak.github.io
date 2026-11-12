@@ -3,7 +3,7 @@ import { appData, saveAppData, STORAGE_KEYS, ADMIN_IDS, SESSION_DURATION_MS,
   roleFor, saveSession, clearSavedSession, scheduleSessionExpiry,
   setSessionExpiredHandler } from "./tsuspeak1.js";
 import { state, byIdElement as $, byId, isAdmin } from "./tsuspeak2.js";
-import { renderCurrentPage, renderSuggestionDetail } from "./tsuspeak3.js";
+import { renderCurrentPage, renderSuggestionDetail } from "./tsuspeak3.js?v=3";
 
 const pages = document.querySelectorAll(".page");
 
