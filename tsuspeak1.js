@@ -16,34 +16,15 @@ export const CATEGORY_EMOJIS = {
   Others: "💬"
 };
 
+export const DEFAULT_CATEGORIES = Object.keys(CATEGORY_EMOJIS);
 
+// Keep member image filenames in the /images folder beside this file.
 export const MEMBERS = [
-  {
-    name: "Tiru, Mark Laurence",
-    position: "Leader",
-    email: "ml.tiru@tsu.edu.ph",
-    image: "tiru.jpg"
-  },
-  {
-    name: "Esteban, Josh Adrielle",
-    position: "Member",
-    email: "ja.esteban@tsu.edu.ph",
-    image: "esteban.jpg"
-  },
-  {
-    name: "Estrada, Jolou Dan",
-    position: "Member",
-    email: "jd.estrada@tsu.edu.ph",
-    image: "estrada.jpg"
-  },
-  {
-    name: "De Mayo, Justine Carlo",
-    position: "Member",
-    email: "jc.demayo@tsu.edu.ph",
-    image: "demayo.jpg"
-  }
+  { name: "Tiru, Mark Laurence", position: "Leader", email: "ml.tiru@tsu.edu.ph", image: "tiru.jpg" },
+  { name: "Esteban, Josh Adrielle", position: "Member", email: "ja.esteban@tsu.edu.ph", image: "esteban.jpg" },
+  { name: "Estrada, Jolou Dan", position: "Member", email: "jd.estrada@tsu.edu.ph", image: "estrada.jpg" },
+  { name: "De Mayo, Justine Carlo", position: "Member", email: "jc.demayo@tsu.edu.ph", image: "demayo.jpg" }
 ];
-
 
 const makePost = (id, title, category, details, votes, status, response, date) => ({
   id, title, category, details, votes, status, response, date,
@@ -88,7 +69,6 @@ export const SEED_ANNOUNCEMENTS = [
   makeAnnouncement(8, "Wellness week schedule", "Student Affairs", "Student Welfare", "September 21, 2026", "Wellness week will feature free health check-ups, fitness activities, and counseling talks. Everyone is invited to join. Alagaan natin ang ating katawan at isip.")
 ];
 
-
 export function loadFromStorage(key, fallback) {
   try {
     const savedValue = localStorage.getItem(key);
@@ -99,44 +79,63 @@ export function loadFromStorage(key, fallback) {
   }
 }
 
+const loadArray = (key, fallback) => {
+  const value = loadFromStorage(key, fallback);
+  return Array.isArray(value) ? value : fallback;
+};
 
 export const appData = {
-  posts: loadFromStorage(STORAGE_KEYS.posts, SEED_POSTS),
-  categories: loadFromStorage(STORAGE_KEYS.categories, DEFAULT_CATEGORIES),
-  announcements: loadFromStorage(STORAGE_KEYS.announcements, SEED_ANNOUNCEMENTS)
+  posts: loadArray(STORAGE_KEYS.posts, SEED_POSTS),
+  categories: loadArray(STORAGE_KEYS.categories, DEFAULT_CATEGORIES),
+  announcements: loadArray(STORAGE_KEYS.announcements, SEED_ANNOUNCEMENTS)
 };
 
 export function saveAppData() {
-  localStorage.setItem(STORAGE_KEYS.posts, JSON.stringify(appData.posts));
-  localStorage.setItem(STORAGE_KEYS.categories, JSON.stringify(appData.categories));
-  localStorage.setItem(STORAGE_KEYS.announcements, JSON.stringify(appData.announcements));
+  try {
+    localStorage.setItem(STORAGE_KEYS.posts, JSON.stringify(appData.posts));
+    localStorage.setItem(STORAGE_KEYS.categories, JSON.stringify(appData.categories));
+    localStorage.setItem(STORAGE_KEYS.announcements, JSON.stringify(appData.announcements));
+  } catch (error) {
+    console.error("Could not save TSU Speak data in this browser.", error);
+  }
 }
 
+export const SESSION_DURATION_MS = 7 * 24 * 60 * 60 * 1000;
+export const ADMIN_IDS = ["admin.ssc@tsu.edu.ph"];
 
-export const SESSION_DURATION_MS = 7 * 24 * 60 * 60 * 1000; // seven days
-export const ADMIN_IDS = ["admin.ssc", "admin.ssc@tsu.edu.ph"];
 let sessionTimer = null;
 let onSessionExpired = () => {};
 
 export function roleFor(email) {
-  return ADMIN_IDS.includes(email) ? "admin" : "student";
+  const normalizedEmail = String(email || "").trim().toLowerCase();
+  return ADMIN_IDS.includes(normalizedEmail) ? "admin" : "student";
 }
 
 export function readSavedSession() {
   const session = loadFromStorage(STORAGE_KEYS.session, null);
-  if (session && session.user && session.expiresAt > Date.now()) return session;
-  if (session) localStorage.removeItem(STORAGE_KEYS.session);
+  if (session?.user && Number(session.expiresAt) > Date.now()) return session;
+  if (session) {
+    try { localStorage.removeItem(STORAGE_KEYS.session); } catch (error) {
+      console.warn("Could not clear expired session.", error);
+    }
+  }
   return null;
 }
 
 export function saveSession(user, expiresAt) {
-  localStorage.setItem(STORAGE_KEYS.session, JSON.stringify({ user, expiresAt }));
+  try {
+    localStorage.setItem(STORAGE_KEYS.session, JSON.stringify({ user, expiresAt }));
+  } catch (error) {
+    console.error("Could not save the login session.", error);
+  }
 }
 
 export function clearSavedSession() {
   if (sessionTimer) clearTimeout(sessionTimer);
   sessionTimer = null;
-  localStorage.removeItem(STORAGE_KEYS.session);
+  try { localStorage.removeItem(STORAGE_KEYS.session); } catch (error) {
+    console.warn("Could not clear the saved session.", error);
+  }
 }
 
 export function setSessionExpiredHandler(callback) {
@@ -145,11 +144,19 @@ export function setSessionExpiredHandler(callback) {
 
 export function scheduleSessionExpiry(expiresAt) {
   if (sessionTimer) clearTimeout(sessionTimer);
-  const delay = Math.min(Math.max(0, expiresAt - Date.now()), 2147483647);
+  const remaining = Number(expiresAt) - Date.now();
+  if (!Number.isFinite(remaining) || remaining <= 0) {
+    clearSavedSession();
+    onSessionExpired();
+    return;
+  }
+  // setTimeout has a maximum signed 32-bit delay; re-check if necessary.
   sessionTimer = setTimeout(() => {
-    if (Date.now() >= expiresAt) {
+    if (Date.now() >= Number(expiresAt)) {
       clearSavedSession();
       onSessionExpired();
+    } else {
+      scheduleSessionExpiry(expiresAt);
     }
-  }, delay);
+  }, Math.min(remaining, 2147483647));
 }
