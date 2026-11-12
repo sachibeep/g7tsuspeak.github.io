@@ -33,7 +33,6 @@ header {
   top: 0;
   z-index: 10;
 }
- <style>
     [hidden] { display: none !important; }
     .auth-tabs {
       display: flex;
