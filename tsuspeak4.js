@@ -1,9 +1,8 @@
-
 import { appData, saveAppData, STORAGE_KEYS, ADMIN_IDS, SESSION_DURATION_MS,
   roleFor, saveSession, clearSavedSession, scheduleSessionExpiry,
   setSessionExpiredHandler } from "./tsuspeak1.js";
 import { state, byIdElement as $, byId, isAdmin } from "./tsuspeak2.js";
-import { renderCurrentPage, renderSuggestionDetail } from "./tsuspeak3.js?v=3";
+import { renderCurrentPage, renderSuggestionDetail } from "./tsuspeak3.js";
 
 const pages = document.querySelectorAll(".page");
 
@@ -92,6 +91,31 @@ function closeSuccessModal() {
   showPage("tracker");
 }
 
+function confirmDialog(title, message, okText = "Delete", { cancel = true, icon = "!", warn = true } = {}) {
+  return new Promise((resolve) => {
+    const modal = $("confirmModal");
+    $("confirmTitle").textContent = title;
+    $("confirmMessage").textContent = message;
+    $("confirmOk").textContent = okText;
+    $("confirmCancel").hidden = !cancel;
+    $("confirmIcon").textContent = icon;
+    $("confirmIcon").classList.toggle("warn", warn);
+    $("confirmIcon").classList.toggle("ok", !warn);
+    modal.hidden = false;
+    (cancel ? $("confirmCancel") : $("confirmOk")).focus();
+    const finish = (result) => {
+      modal.hidden = true;
+      $("confirmOk").onclick = null;
+      $("confirmCancel").onclick = null;
+      modal.onkeydown = null;
+      resolve(result);
+    };
+    $("confirmOk").onclick = () => finish(true);
+    $("confirmCancel").onclick = () => finish(false);
+    modal.onkeydown = (event) => { if (event.key === "Escape") finish(!cancel); };
+  });
+}
+
 function handleDocumentClick(event) {
   const target = event.target;
   let element;
@@ -140,7 +164,8 @@ function handleDocumentClick(event) {
     const index = Number(element.dataset.dc);
     const oldName = appData.categories[index];
     if (oldName === "Others") return alert("The Others category cannot be deleted.");
-    if (confirm(`Delete "${oldName}"? Its posts will move to Others.`)) {
+    confirmDialog(`Delete "${oldName}"?`, "Its posts will move to Others.").then((ok) => {
+      if (!ok) return;
       appData.posts.forEach((post) => { if (post.category === oldName) post.category = "Others"; });
       appData.announcements.forEach((announcement) => {
         if ((announcement.category || announcement.cat) === oldName) {
@@ -149,11 +174,11 @@ function handleDocumentClick(event) {
         }
       });
       if (!appData.categories.includes("Others")) appData.categories.push("Others");
-      appData.categories.splice(index, 1);
+      appData.categories.splice(appData.categories.indexOf(oldName), 1);
       if (state.filterCategory === oldName) state.filterCategory = "All";
       saveAppData();
       renderCurrentPage();
-    }
+    });
     return;
   }
   if ((element = target.closest("[data-page]"))) {
@@ -252,21 +277,28 @@ function handleAdminPostAction(event) {
   if (!post) return;
 
   if (button.classList.contains("save")) {
-    post.status = $("st" + postId).value;
-    post.response = $("rs" + postId).value.trim();
-    saveAppData();
-    alert("Updated.");
-    renderCurrentPage();
+    const newStatus = $("st" + postId).value;
+    const newResponse = $("rs" + postId).value.trim();
+    confirmDialog("Save changes?", `Update the status and response for "${post.title}".`, "Save", { icon: "?", warn: false })
+      .then((ok) => {
+        if (!ok) return;
+        post.status = newStatus;
+        post.response = newResponse;
+        saveAppData();
+        renderCurrentPage();
+        return confirmDialog("Saved!", "The post has been updated.", "OK", { cancel: false, icon: "✓", warn: false });
+      });
   } else if (button.classList.contains("hide")) {
     post.hidden = !post.hidden;
     saveAppData();
     renderCurrentPage();
   } else if (button.classList.contains("del")) {
-    if (confirm("Delete this post?")) {
+    confirmDialog("Delete this post?", `"${post.title}" will be permanently removed.`).then((ok) => {
+      if (!ok) return;
       appData.posts = appData.posts.filter((item) => item.id !== postId);
       saveAppData();
       renderCurrentPage();
-    }
+    });
   }
 }
 
