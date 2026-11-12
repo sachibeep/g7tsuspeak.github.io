@@ -327,3 +327,13 @@ tr.dim { opacity: .55; }
   .mem .member-photo { width: 80px; height: 80px; }
   .mem .member-email { font-size: 10px; }
 }
+
+/* ===== Buttons in admin table + popups ===== */
+.btn.del:hover, .btn.hide:hover { background-color: var(--maroon); color: #fff; }
+.btn.cancel { color: var(--maroon); border-color: var(--maroon); }
+.btn.cancel:hover { background-color: var(--maroon); color: #fff; }
+.confirm-actions { display: flex; gap: 10px; justify-content: center; }
+.confirm-actions .btn { margin-top: 0; min-width: 100px; }
+.success-modal-icon.warn { background: #f8d4d0; color: #b3261e; }
+.success-modal-icon.ok { background: #f5d78e; color: #6b3d00; }
+td .btn { margin: 2px 2px 2px 0; }
