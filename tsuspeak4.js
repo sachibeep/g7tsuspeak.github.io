@@ -170,26 +170,38 @@ function handleDocumentClick(event) {
 
 function handleLoginSubmit(event) {
   event.preventDefault();
+
   const email = $("email").value.trim().toLowerCase();
   const password = $("password").value;
-  if (!email) { $("loginMsg").textContent = "Please enter your email."; return; }
-  if (!ADMIN_IDS.includes(email) && !/^[^\s@]+@tsu\.edu\.ph$/.test(email)) {
-    $("loginMsg").textContent = "Please use your TSU email (@tsu.edu.ph).";
+
+  if (!email) {
+    $("loginMsg").textContent = "Please enter your email.";
     return;
   }
-  if (!password) { $("loginMsg").textContent = "Please enter your password."; return; }
 
- 
-  $("loginMsg").textContent = "";
-  try {
+  if (!password) {
+    $("loginMsg").textContent = "Please enter your password.";
+    return;
+  }
+
+  // Admin account
+  if (email === "admin.ssc@tsu.edu.ph") {
+    $("loginMsg").textContent = "";
     startUserSession(email);
     $("loginForm").reset();
-  } catch (error) {
-    state.currentUser = null;
-    state.sessionExpiresAt = 0;
-    $("loginMsg").textContent = "Unable to start your session. Please check your browser storage and try again.";
-    updateAuthUI();
+    return;
   }
+
+  // General student demo account
+  if (/^[^\s@]+@tsu\.edu\.ph$/.test(email)) {
+    $("loginMsg").textContent = "";
+    startUserSession(email);
+    $("loginForm").reset();
+    return;
+  }
+
+  $("loginMsg").textContent =
+    "Please use a valid TSU email address (@tsu.edu.ph).";
 }
 
 function handleAuthButton() {
