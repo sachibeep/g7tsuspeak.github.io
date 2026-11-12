@@ -144,8 +144,14 @@ export function renderAbout() {
       <p class="hint" style="color:var(--gold)">Email · Facebook · Student-SSC Office</p></div>
     <h3 class="center">Meet the Student-SSC</h3><div id="memCar" class="carousel"></div>`;
   renderCarousel($("memCar"), "members", MEMBERS, 3, (member) =>
-    `<div class="mem"><div class="circ">👤</div><b>${esc(member.name)}</b>${esc(member.position)}<br>name@tsu.edu.ph</div>`);
-}
+    `<div class="mem">
+  <div class="circ">
+    <img src="./${esc(member.image)}" alt="${esc(member.name)}">
+  </div>
+  <b>${esc(member.name)}</b>
+  ${esc(member.position)}
+  <br>${esc(member.email)}
+</div>`);}
 
 export function renderSubmit() {
   $("category").innerHTML = appData.categories.map((category) => `<option value="${esc(category)}">${esc(category)}</option>`).join("");
