@@ -151,7 +151,7 @@ export function renderAbout() {
   (member) => `
     <div class="mem">
       <div class="circ">
-        <img src="./images/${member.image}" alt="${member.name}">
+        <img src="./${member.image}" alt="${member.name}">
       </div>
       <b>${member.name}</b>
       <p>${member.position}</p>
