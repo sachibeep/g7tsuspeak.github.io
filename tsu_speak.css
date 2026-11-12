@@ -159,11 +159,20 @@ h3 { color: var(--maroon); margin: 20px 0 8px; }
   overflow: hidden;
 }
 /* ===== Leaders/Members Picture ===== */
+
+.mem {
+  text-align: center;
+}
+
 .mem .circ {
   width: 64px;
   height: 64px;
-  overflow: hidden;
+  margin: 0 auto 8px;
   border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mem .circ img {
@@ -172,6 +181,17 @@ h3 { color: var(--maroon); margin: 20px 0 8px; }
   object-fit: cover;
   display: block;
 }
+
+.mem .circ span {
+  font-size: 32px;
+}
+
+.member-email {
+  font-size: 12px;
+  overflow-wrap: anywhere;
+  margin-top: 3px;
+}
+
 /* ===== Forms ===== */
 .card {
   background-color: #fff;
