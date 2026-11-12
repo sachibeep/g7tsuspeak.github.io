@@ -170,6 +170,8 @@ export function renderAbout() {
 
     <h3 class="center">Meet Group 7</h3>
     <div id="memCar" class="carousel"></div>
+    <img src="./images/${esc(member.image)}"
+     alt="${esc(member.name)}">
   `;
 
   renderCarousel($("memCar"), "members", MEMBERS, 3, (member) => `
