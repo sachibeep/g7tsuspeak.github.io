@@ -137,6 +137,7 @@ export function renderAnnouncementDetail() {
 }
 
 
+
 export function renderAbout() {
   $("about").innerHTML = `
     <div class="g2" style="align-items:center">
@@ -170,9 +171,32 @@ export function renderAbout() {
 
     <h3 class="center">Meet Group 7</h3>
     <div id="memCar" class="carousel"></div>
-    <img src="./images/${esc(member.image)}"
-     alt="${esc(member.name)}">
-  `;
+  `);
+}
+
+  renderCarousel($("memCar"), "members", MEMBERS, 3, (member) => `
+    <div class="mem">
+      <div class="circ">
+        ${
+          member.image
+            ? `<img
+                src="./images/${esc(member.image)}"
+                alt="${esc(member.name)}"
+                loading="lazy"
+              >`
+            : `<span>👤</span>`
+        }
+      </div>
+
+      <b>${esc(member.name)}</b>
+      <div>${esc(member.position)}</div>
+      <div class="member-email">
+        ${esc(member.email || "")}
+      </div>
+    </div>
+  `);
+}
+
 
   renderCarousel($("memCar"), "members", MEMBERS, 3, (member) => `
     <div class="mem">
