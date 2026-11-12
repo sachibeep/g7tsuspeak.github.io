@@ -20,10 +20,10 @@ export const DEFAULT_CATEGORIES = Object.keys(CATEGORY_EMOJIS);
 
 // Keep member image filenames in the /images folder beside this file.
 export const MEMBERS = [
-  { name: "Tiru, Mark Laurence", position: "Leader", email: "ml.tiru@tsu.edu.ph", image: "tiru.jpg" },
-  { name: "Esteban, Josh Adrielle", position: "Member", email: "ja.esteban@tsu.edu.ph", image: "esteban.jpg" },
-  { name: "Estrada, Jolou Dan", position: "Member", email: "jd.estrada@tsu.edu.ph", image: "estrada.jpg" },
-  { name: "De Mayo, Justine Carlo", position: "Member", email: "jc.demayo@tsu.edu.ph", image: "demayo.jpg" }
+  { name: "Tiru, Mark Laurence", position: "Leader", email: "ml.tiru@tsu.edu.ph", image: "tiru.jpeg" },
+  { name: "Esteban, Josh Adrielle", position: "Member", email: "ja.esteban@tsu.edu.ph", image: "esteban.jpeg" },
+  { name: "Estrada, Jolou Dan", position: "Member", email: "jd.estrada@tsu.edu.ph", image: "estrada.jpeg" },
+  { name: "De Mayo, Justine Carlo", position: "Member", email: "jc.demayo@tsu.edu.ph", image: "demayo.jpeg" }
 ];
 
 const makePost = (id, title, category, details, votes, status, response, date) => ({
