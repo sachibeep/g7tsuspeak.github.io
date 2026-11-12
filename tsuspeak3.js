@@ -138,8 +138,16 @@ export function renderAnnouncementDetail() {
 
 
 
+
 export function renderAbout() {
-  $("about").innerHTML = `
+  const about = $("about");
+
+  if (!about) {
+    console.error("About Us section not found in index.html");
+    return;
+  }
+
+  about.innerHTML = `
     <div class="g2" style="align-items:center">
       <div>
         <h2>ABOUT US</h2>
@@ -170,8 +178,40 @@ export function renderAbout() {
     </div>
 
     <h3 class="center">Meet Group 7</h3>
+
     <div id="memCar" class="carousel"></div>
-  `);
+  `;
+
+  renderCarousel(
+    $("memCar"),
+    "members",
+    MEMBERS,
+    3,
+    (member) => `
+      <div class="mem">
+        <div class="circ">
+          ${
+            member.image
+              ? `<img
+                  src="./images/${esc(member.image)}"
+                  alt="${esc(member.name)}"
+                  loading="lazy"
+                  onerror="this.style.display='none'"
+                >`
+              : `<span>👤</span>`
+          }
+        </div>
+
+        <b>${esc(member.name)}</b>
+
+        <div>${esc(member.position)}</div>
+
+        <div class="member-email">
+          ${esc(member.email || "")}
+        </div>
+      </div>
+    `
+  );
 }
 
   renderCarousel($("memCar"), "members", MEMBERS, 3, (member) => `
