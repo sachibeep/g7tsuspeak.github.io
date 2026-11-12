@@ -18,10 +18,34 @@ export const CATEGORY_EMOJIS = {
 
 export const DEFAULT_CATEGORIES = Object.keys(CATEGORY_EMOJIS);
 
-export const MEMBERS = ["One", "Two", "Three", "Four", "Five"].map((name, index) => ({
-  name: `Name ${name}`,
-  position: ["President", "Vice President", "Secretary", "Treasurer", "Auditor"][index]
-}));
+export const MEMBERS = [
+  {
+    name: "Tiru, Mark Laurence",
+    position: "Leader",
+    email: "ml.tiru@tsu.edu.ph",
+    image: "tiru.jpg"
+  },
+  {
+    name: "Esteban, Josh Adrielle",
+    position: "Member",
+    email: "ja.esteban@tsu.edu.ph",
+    image: "esteban.jpg"
+  },
+  {
+    name: "Estrada, Jolou Dan",
+    position: "Member",
+    email: "jd.estrada@tsu.edu.ph",
+    image: "estrada.jpg"
+  },
+  {
+    name: "De Mayo, Justine Carlo",
+    position: "Member",
+    email: "jc.demayo@tsu.edu.ph",
+    image: "demayo.jpg"
+  },
+
+];
+
 
 const makePost = (id, title, category, details, votes, status, response, date) => ({
   id, title, category, details, votes, status, response, date,
