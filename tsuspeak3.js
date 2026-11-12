@@ -140,47 +140,12 @@ export function renderAnnouncementDetail() {
 
 
 export function renderAbout() {
-  const about = $("about");
-
-  if (!about) {
-    console.error("About Us section not found in index.html");
-    return;
-  }
-
-  about.innerHTML = `
-    <div class="g2" style="align-items:center">
-      <div>
-        <h2>ABOUT US</h2>
-        <p>
-          TSU Speak is the student forum where students of
-          Tarlac State University share concerns and ideas,
-          and follow how the council responds.
-        </p>
-      </div>
-
-      <div class="card big">
-        <div class="img" style="height:130px;font-size:40px;margin:0">
-          🎓
-        </div>
-      </div>
-    </div>
-
-    <div class="stay">
-      <h3>CONTACT US</h3>
-      <div class="dots">
-        <a class="dot" href="#">✉</a>
-        <a class="dot" href="#">fb</a>
-        <a class="dot" href="#">📍</a>
-      </div>
-      <p class="hint" style="color:var(--gold)">
-        Email · Facebook · Group 7
-      </p>
-    </div>
-
-    <h3 class="center">Meet Group 7</h3>
-
-    <div id="memCar" class="carousel"></div>
-  `;
+  $("about").innerHTML = `<div class="g2" style="align-items:center"><div><h2>ABOUT US</h2>
+      <p>TSU Speak is the Student-SSC open forum where students of Tarlac State University share concerns and ideas, and follow how the council responds.</p></div>
+      <div class="card big"><div class="img" style="height:130px;font-size:40px;margin:0">🎓</div></div></div>
+    <div class="stay"><h3>CONTACT US</h3><div class="dots"><a class="dot" href="#">✉</a><a class="dot" href="#">fb</a><a class="dot" href="#">📍</a></div>
+      <p class="hint" style="color:var(--gold)">Email · Facebook · Student-SSC Office</p></div>
+    <h3 class="center">Meet Group 7</h3><div id="memCar" class="carousel"></div>`;
 
   renderCarousel(
     $("memCar"),
