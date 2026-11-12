@@ -4,64 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TSU Speak | Student-SSC Open Forum</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="TSU_speak.css">
 
-  <style>
-    [hidden] { display: none !important; }
-    .auth-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 0 auto 16px;
-    }
-    .auth-form { margin-left: auto; margin-right: auto; }
-    .success-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: rgba(10, 14, 20, 0.72);
-    }
-    .success-modal-card {
-      width: min(100%, 420px);
-      padding: 28px 24px;
-      border: 1px solid #ead9b8;
-      border-radius: 18px;
-      background: #fffaf0;
-      color: #28211b;
-      text-align: center;
-      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
-      animation: successModalIn 180ms ease-out;
-    }
-    .success-modal-icon {
-      display: grid;
-      width: 48px;
-      height: 48px;
-      margin: 0 auto 12px;
-      place-items: center;
-      border-radius: 50%;
-      background: #f5d78e;
-      color: #6b3d00;
-      font-size: 28px;
-      font-weight: 700;
-    }
-    .success-modal-card h2 { margin: 0 0 10px; }
-    .success-modal-card p { margin: 0 0 20px; line-height: 1.55; }
-    .success-modal-card .btn { min-width: 90px; }
-    @keyframes successModalIn {
-      from { opacity: 0; transform: translateY(8px) scale(.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .success-modal-card { animation: none; }
-    }
-  </style>
-</head>
-<body>
+ 
 
 <header id="top">
   <h1 class="logo"><span class="badge">TS</span> TSU Speak</h1>
@@ -83,35 +28,17 @@
   <!-- HOME (Figures 18 to 20) -->
   <section id="home" class="page"></section>
 
-  <!-- LOGIN / SIGN UP (FR1, FR8) -->
+  <!-- LOGIN (FR1, FR8) - demo mode, no account creation -->
   <section id="login" class="page active">
-    <div class="auth-tabs" role="tablist" aria-label="Account access">
-      <button type="button" id="showLoginTab" class="btn gold" role="tab" aria-selected="true">Log in</button>
-      <button type="button" id="showSignupTab" class="btn outline" role="tab" aria-selected="false">Create account</button>
-    </div>
-
     <form id="loginForm" class="card narrow auth-form">
       <h2>Log in to TSU Speak</h2>
-      <label for="email">TSU email</label>
-      <input type="email" id="email" placeholder="juan.delacruz@tsu.edu.ph" autocomplete="username" required>
+      <label for="email">Email</label>
+      <input type="text" id="email" placeholder="juan.delacruz@tsu.edu.ph" autocomplete="username" required>
       <label for="password">Password</label>
       <input type="password" id="password" autocomplete="current-password" required>
-      <p class="hint">Use your registered TSU email and password. For this prototype, an account beginning with <b>ssc</b> is assigned the demo SSC role.</p>
+      <p class="hint">Demo mode: use your TSU email (<b>@tsu.edu.ph</b>) with any password to log in as a student. Only <b>admin.ssc</b> opens the SSC admin dashboard.</p>
       <p id="loginMsg" class="error" role="alert"></p>
       <button type="submit" class="btn gold">Log in</button>
-    </form>
-
-    <form id="signupForm" class="card narrow auth-form" hidden>
-      <h2>Create your TSU Speak account</h2>
-      <label for="signupEmail">TSU email</label>
-      <input type="email" id="signupEmail" placeholder="juan.delacruz@tsu.edu.ph" autocomplete="username" required>
-      <label for="signupPassword">Password</label>
-      <input type="password" id="signupPassword" minlength="8" autocomplete="new-password" required>
-      <label for="signupConfirm">Confirm password</label>
-      <input type="password" id="signupConfirm" minlength="8" autocomplete="new-password" required>
-      <p class="hint">Use an @tsu.edu.ph email address and a password with at least 8 characters.</p>
-      <p id="signupMsg" class="error" role="alert"></p>
-      <button type="submit" class="btn gold">Create account</button>
     </form>
   </section>
 
@@ -217,6 +144,13 @@
   <p>Copyright &copy; Tarlac State University &middot; Student-SSC. All rights reserved. &middot; <a href="#top">Back to top</a></p>
 </footer>
 
-<script src="script.js"></script>
+<!--JS-->
+<script src="tsuspeak1.js"></script>
+
+<script src="tsuspeak2.js"></script>
+
+<script src="tsuspeak3.js"></script>
+
+<script src="tsuspeak4.js"></script>
 </body>
 </html>
