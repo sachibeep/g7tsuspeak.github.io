@@ -1,6 +1,6 @@
 // ===== Data =====
 const STATUSES = ["Submitted", "Under Review", "Approved", "Implemented"];
-const K = { posts: "tsuPosts2", cats: "tsuCats2", ann: "tsuAnn2" };
+const K = { posts: "tsuPosts3", cats: "tsuCats2", ann: "tsuAnn3" };
 const CE = { Academics: "📚", Facilities: "🏫", Events: "🎉", "Student Welfare": "💛", "Org. Affairs": "🏛️", Others: "💬" };
 const load = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } };
 
@@ -16,19 +16,29 @@ const seedPosts = [
   mk(7, "More recycling bins on campus", "Facilities", "Bins are far from the buildings.", 33, "Submitted", "", "2026-09-24"),
   mk(8, "Organization fair every semester", "Org. Affairs", "Help students find clubs to join.", 29, "Approved", "Scheduled with the Student-SSC.", "2026-09-25"),
 ];
-seedPosts[0].comments = [{ u: "juan", t: "Agree, this would help a lot!" }, { u: "maria", t: "Please add near the second floor too." }];
+seedPosts[0].comments = [{ u: "juan", t: "Agree, this would help a lot!" }, { u: "maria", t: "Please add near the second floor too." }, { u: "pedro", t: "Sana madagdagan din ang outlets sa reading area." }];
+seedPosts[1].comments = [{ u: "liza", t: "Sana po ay tuloy-tuloy ito every term." }];
+seedPosts[2].comments = [{ u: "ana", t: "Malaking tulong ito, salamat po!" }, { u: "carlo", t: "Finally, mabilis na ang wifi sa court." }];
+seedPosts[3].comments = [{ u: "mark", t: "Count me in! Marunong akong kumanta." }];
 
-const LOREM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla facilisi.";
-const an = (id, title, author, cat, date) => ({ id, title, author, cat, date, body: LOREM });
+const an = (id, title, author, cat, date, body) => ({ id, title, author, cat, date, body });
 const seedAnn = [
-  an(1, "Enrollment schedule for the next term", "Registrar Office", "Academics", "September 28, 2026"),
-  an(2, "Intramurals week reminders", "Student-SSC", "Events", "September 27, 2026"),
-  an(3, "Scholarship application notice", "Student Affairs", "Student Welfare", "September 26, 2026"),
-  an(4, "Library hours during midterms", "Library", "Academics", "September 25, 2026"),
-  an(5, "Campus clean-up drive", "Student-SSC", "Events", "September 24, 2026"),
-  an(6, "Student ID validation", "Registrar Office", "Academics", "September 23, 2026"),
-  an(7, "Org registration is open", "Student-SSC", "Org. Affairs", "September 22, 2026"),
-  an(8, "Wellness week schedule", "Student Affairs", "Student Welfare", "September 21, 2026"),
+  an(1, "Enrollment schedule for the next term", "Registrar Office", "Academics", "September 28, 2026",
+    "Enrollment for the next term will be held by year level. Please check your assigned schedule on the student portal and prepare your requirements ahead of time. Irregular students may proceed to the help desk for assistance."),
+  an(2, "Intramurals week reminders", "Student-SSC", "Events", "September 27, 2026",
+    "Intramurals week is almost here! Players must wear their college jersey and bring a valid school ID. Please arrive 15 minutes before your game and follow the schedule posted by the Student-SSC."),
+  an(3, "Scholarship application notice", "Student Affairs", "Student Welfare", "September 26, 2026",
+    "Applications for scholarships and financial assistance are now open. Submit the accomplished form and the required documents to the Student Affairs office before the deadline. Late submissions will not be accepted."),
+  an(4, "Library hours during midterms", "Library", "Academics", "September 25, 2026",
+    "The library will extend its operating hours during the midterm examination period. Students are reminded to keep the reading areas quiet and to return borrowed books on time."),
+  an(5, "Campus clean-up drive", "Student-SSC", "Events", "September 24, 2026",
+    "Join the campus clean-up drive! Volunteers are asked to bring gloves and a reusable water bottle. Sama-sama nating panatilihing malinis ang ating campus."),
+  an(6, "Student ID validation", "Registrar Office", "Academics", "September 23, 2026",
+    "Student ID validation is ongoing at the Registrar Office. Please bring your current ID and proof of enrollment. Students with lost IDs should coordinate with the office for a replacement."),
+  an(7, "Org registration is open", "Student-SSC", "Org. Affairs", "September 22, 2026",
+    "Student organizations may now register for the semester. Submit your list of officers, adviser details, and activity plan to the Student-SSC. New organizations are welcome to apply."),
+  an(8, "Wellness week schedule", "Student Affairs", "Student Welfare", "September 21, 2026",
+    "Wellness week will feature free health check-ups, fitness activities, and counseling talks. Everyone is invited to join. Alagaan natin ang ating katawan at isip."),
 ];
 const MEMBERS = ["One", "Two", "Three", "Four", "Five"].map((n, k) => ({ n: "Name " + n, p: ["President", "Vice President", "Secretary", "Treasurer", "Auditor"][k] }));
 
@@ -110,7 +120,7 @@ function rHome() { // Figures 18 to 20
       <div class="g3">${rec.slice(2).map((p) => card(p)).join("")}</div>
       <div class="center"><button class="btn gold" data-page="suggestions">View All Suggestions</button></div>`) +
     blk("Latest Addressed Suggestions", done.map((p) => `<div class="addr" data-page="suggestion" data-id="${p.id}"><div class="img">✓</div>
-      <div><b>${esc(p.title)}</b><small>SSC response: ${esc(p.response || "short note and date")}</small></div><span class="status ${sc(p.status)}">${p.status}</span></div>`).join("") +
+      <div><b>${esc(p.title)}</b><small>SSC response: ${esc(p.response || "Waiting for an update from the Student-SSC")}</small></div><span class="status ${sc(p.status)}">${p.status}</span></div>`).join("") +
       `<div class="center"><button class="btn gold" data-page="suggestions">View All Addressed</button></div>`, "alt") +
     blk("Latest from Announcements", anns.slice(0, 3).map(annRow).join("")) +
     `<div class="stay"><h3>STAY CONNECTED WITH TSU SPEAK</h3><div class="dots">${["fb", "ig", "x", "yt"].map((x) => `<a class="dot" href="#">${x}</a>`).join("")}</div></div>`;
