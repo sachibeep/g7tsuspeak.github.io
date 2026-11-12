@@ -142,7 +142,7 @@ export function renderAbout() {
       <div class="card big"><div class="img" style="height:130px;font-size:40px;margin:0">🎓</div></div></div>
     <div class="stay"><h3>CONTACT US</h3><div class="dots"><a class="dot" href="#">✉</a><a class="dot" href="#">fb</a><a class="dot" href="#">📍</a></div>
       <p class="hint" style="color:var(--gold)">Email · Facebook · Student-SSC Office</p></div>
-    <h3 class="center">Meet the Student-SSC</h3><div id="memCar" class="carousel"></div>`;
+    <h3 class="center">Meet the Group 7</h3><div id="memCar" class="carousel"></div>`;
     renderCarousel($("memCar"), "members", MEMBERS, 3, (member) => `
     <div class="mem" style="width:160px;text-align:center;padding:12px 8px;font-size:13px">
       <div class="member-photo" style="width:112px;height:112px;margin:0 auto 12px;border-radius:50%;overflow:hidden;border:3px solid #ffc72c;background:#f2e8d5">
