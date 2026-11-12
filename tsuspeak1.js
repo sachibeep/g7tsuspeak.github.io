@@ -23,25 +23,25 @@ export const MEMBERS = [
     name: "Tiru, Mark Laurence",
     position: "Leader",
     email: "ml.tiru@tsu.edu.ph",
-    image: "tiru.jpg"
+    image: "tiru.jpeg"
   },
   {
     name: "Esteban, Josh Adrielle",
     position: "Member",
     email: "ja.esteban@tsu.edu.ph",
-    image: "esteban.jpg"
+    image: "esteban.jpeg"
   },
   {
     name: "Estrada, Jolou Dan",
     position: "Member",
     email: "jd.estrada@tsu.edu.ph",
-    image: "estrada.jpg"
+    image: "estrada.jpeg"
   },
   {
     name: "De Mayo, Justine Carlo",
     position: "Member",
     email: "jc.demayo@tsu.edu.ph",
-    image: "demayo.jpg"
+    image: "demayo.jpeg"
   },
 
 ];
