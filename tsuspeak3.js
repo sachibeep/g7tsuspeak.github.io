@@ -143,17 +143,15 @@ export function renderAbout() {
     <div class="stay"><h3>CONTACT US</h3><div class="dots"><a class="dot" href="#">✉</a><a class="dot" href="#">fb</a><a class="dot" href="#">📍</a></div>
       <p class="hint" style="color:var(--gold)">Email · Facebook · Student-SSC Office</p></div>
     <h3 class="center">Meet the Student-SSC</h3><div id="memCar" class="carousel"></div>`;
-  renderCarousel($("memCar"), "members", MEMBERS, 3, (member) => `
-    <div class="mem">
-      <div class="member-photo">
-        <img src="./${member.image}" alt="${esc(member.name)}">
+    renderCarousel($("memCar"), "members", MEMBERS, 3, (member) => `
+    <div class="mem" style="width:160px;text-align:center;padding:12px 8px;font-size:13px">
+      <div class="member-photo" style="width:112px;height:112px;margin:0 auto 12px;border-radius:50%;overflow:hidden;border:3px solid #ffc72c;background:#f2e8d5">
+        <img src="./${member.image}" alt="${esc(member.name)}" style="width:100%;height:100%;object-fit:cover;display:block">
       </div>
-      <b>${esc(member.name)}</b>
+      <b style="display:block">${esc(member.name)}</b>
       <p class="member-position">${esc(member.position)}</p>
-      <a class="member-email" href="mailto:${esc(member.email)}">${esc(member.email)}</a>
+      <a class="member-email" href="mailto:${esc(member.email)}" style="display:block;font-size:11px;color:#800000">${esc(member.email)}</a>
     </div>`);
-}
-
 export function renderSubmit() {
   $("category").innerHTML = appData.categories.map((category) => `<option value="${esc(category)}">${esc(category)}</option>`).join("");
 }
