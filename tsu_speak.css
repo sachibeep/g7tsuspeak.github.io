@@ -155,17 +155,7 @@ h3 { color: var(--maroon); margin: 20px 0 8px; }
 }
 .stat strong { display: block; font-size: 26px; color: var(--gold); }
 .steps { margin-left: 20px; }
-.mem .circ {
-  overflow: hidden;
-}
-/* ===== Leaders/Members Picture ===== */
-.mem .circ img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  display: block;
-}
+
 /* ===== Forms ===== */
 .card {
   background-color: #fff;
@@ -303,3 +293,69 @@ a { color: inherit; text-decoration: none; }
 .btn.del, .btn.hide { color: var(--maroon); border-color: var(--maroon); }
 tr.dim { opacity: .55; }
 @media (max-width: 700px) { .g2, .g3, .dt, .dt.ad { grid-template-columns: 1fr; } }
+/* ===== Group 7 member cards ===== */
+.mem {
+  min-width: 0;
+  padding: 12px 8px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.mem .member-photo {
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2e8d5;
+  border: 3px solid var(--gold);
+}
+
+.mem .member-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mem .member-photo.image-missing::after {
+  content: "👤";
+  font-size: 42px;
+}
+
+.mem .member-position {
+  margin-top: 4px;
+  color: #6b5555;
+  font-size: 0.92rem;
+}
+
+.mem .member-email {
+  display: inline-block;
+  margin-top: 5px;
+  color: var(--maroon);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.about-icon {
+  height: 130px;
+  margin: 0;
+  font-size: 40px;
+}
+
+.members-carousel .row {
+  align-items: stretch;
+}
+
+@media (max-width: 600px) {
+  .mem .member-photo {
+    width: 88px;
+    height: 88px;
+  }
+  .mem .member-email {
+    font-size: 0.72rem;
+  }
+}
