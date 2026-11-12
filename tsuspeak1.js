@@ -34,12 +34,11 @@ const makePost = (id, title, category, details, votes, status, response, date) =
 export const SEED_POSTS = [
   makePost(1, "More charging stations in the library", "Facilities", "Add power strips on long tables. Install outlets near the reading area. Reserve a charging corner during exams.", 128, "Under Review", "Request forwarded to the library office.", "2026-09-20"),
   makePost(2, "Extend enrollment help desk hours", "Academics", "Long afternoon lines for irregular students.", 96, "Approved", "Hours extended until 6 PM next term.", "2026-09-18"),
-  makePost(3, "Free wifi at the covered court", "Student Welfare", "Students study there after class.", 211, "Implemented", "Wifi access points installed.", "2026-09-10"),
+  makePost(3, "Free wifi anywhere inside the campus especially on the extension campuses", "Student Welfare", "Students study there after class.", 211, "Implemented", "Wifi access points installed.", "2026-09-10"),
   makePost(4, "Monthly student talent night", "Events", "A stage for student performers.", 64, "Under Review", "", "2026-09-22"),
   makePost(5, "Add more benches near the oval", "Facilities", "Few places to rest between classes.", 52, "Approved", "Benches will be installed this semester.", "2026-09-21"),
   makePost(6, "Open the study hall until 8 PM", "Academics", "Extended hours before exams.", 47, "Under Review", "", "2026-09-23"),
-  makePost(7, "More recycling bins on campus", "Facilities", "Bins are far from the buildings.", 33, "Submitted", "", "2026-09-24"),
-  makePost(8, "Organization fair every semester", "Org. Affairs", "Help students find clubs to join.", 29, "Approved", "Scheduled with the Student-SSC.", "2026-09-25")
+  makePost(7, "More recycling bins on campus", "Facilities", "Bins are far from the buildings.", 33, "Submitted", "", "2026-09-24")
 ];
 
 SEED_POSTS[0].comments = [
@@ -62,7 +61,7 @@ export const SEED_ANNOUNCEMENTS = [
   makeAnnouncement(1, "Enrollment schedule for the next term", "Registrar Office", "Academics", "September 28, 2026", "Enrollment for the next term will be held by year level. Please check your assigned schedule on the student portal and prepare your requirements ahead of time. Irregular students may proceed to the help desk for assistance."),
   makeAnnouncement(2, "Intramurals week reminders", "Student-SSC", "Events", "September 27, 2026", "Intramurals week is almost here! Players must wear their college jersey and bring a valid school ID. Please arrive 15 minutes before your game and follow the schedule posted by the Student-SSC."),
   makeAnnouncement(3, "Scholarship application notice", "Student Affairs", "Student Welfare", "September 26, 2026", "Applications for scholarships and financial assistance are now open. Submit the accomplished form and the required documents to the Student Affairs office before the deadline. Late submissions will not be accepted."),
-  makeAnnouncement(4, "Library hours during midterms", "Library", "Academics", "September 25, 2026", "The library will extend its operating hours during the midterm examination period. Students are reminded to keep the reading areas quiet and to return borrowed books on time."),
+  makeAnnouncement(4, "Library hours during midterms and finals", "Library", "Academics", "September 25, 2026", "The library will extend its operating hours during the midterm examination period. Students are reminded to keep the reading areas quiet and to return borrowed books on time."),
   makeAnnouncement(5, "Campus clean-up drive", "Student-SSC", "Events", "September 24, 2026", "Join the campus clean-up drive! Volunteers are asked to bring gloves and a reusable water bottle. Sama-sama nating panatilihing malinis ang ating campus."),
   makeAnnouncement(6, "Student ID validation", "Registrar Office", "Academics", "September 23, 2026", "Student ID validation is ongoing at the Registrar Office. Please bring your current ID and proof of enrollment. Students with lost IDs should coordinate with the office for a replacement."),
   makeAnnouncement(7, "Org registration is open", "Student-SSC", "Org. Affairs", "September 22, 2026", "Student organizations may now register for the semester. Submit your list of officers, adviser details, and activity plan to the Student-SSC. New organizations are welcome to apply."),
